@@ -9,6 +9,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Principal {
     private final Scanner sc;
@@ -33,7 +34,7 @@ public class Principal {
             System.out.println("""
                     \n----------------------LITERATURA----------------------
 
-                    1 - Buscar libro por titulo
+                    1 - Registrar libro por titulo
                     2 - Buscar autor por nombre
                     3 - Listar libros registrados
                     4 - Listar autores registrados
@@ -60,18 +61,18 @@ public class Principal {
                     System.out.println("\nCerrando la aplicacion...\n");
                     break;
                 case 1:
-                    buscarLibroPorTitulo();
+                    registrarLibroPorTitulo();
                     break;
                 case 2:
                     buscarAutorPorNombre();
                     break;
                 case 3:
                     if (listarLibrosRegistrados().isEmpty()) System.out.println("\nNo hay libros registrados.");
-                    else listarLibrosRegistrados().forEach(System.out::println);
+                    else listarLibrosRegistrados().forEach(System.out::print);
                     break;
                 case 4:
                     if (listarAutoresRegistrados().isEmpty()) System.out.println("\nNo hay autores registrados.");
-                    else listarAutoresRegistrados().forEach(System.out::println);
+                    else listarAutoresRegistrados().forEach(System.out::print);
                     break;
                 case 5:
                     listarAutoresPorAño();
@@ -112,7 +113,7 @@ public class Principal {
         double media = autorRepository.mediaEdad();
 
         System.out.println("""
-                \nEstadistica de autores:
+                \nEstadistica de los autores registrados:
                 
                 Cantidad de autores: %d
                 Autor mas longevo en fallecer: '%s' con %d años
@@ -159,7 +160,7 @@ public class Principal {
         if (libros.size() < 10) {
             System.out.println("\nNo hay la cantidad de libros registrados para el top 10.");return;
         }
-        libros.forEach(System.out::println);
+        libros.forEach(System.out::print);
     }
 
     public void listarPorIdioma() {
@@ -181,7 +182,7 @@ public class Principal {
 
             System.out.println("\nCantidad de libros encontrados: " + cantidadLibrosEncontrados);
             // Obtiene y muestra todos los libros que corresponden al idioma ingresado.
-            libroRepository.findByIdioma(Idioma.getIdioma(sigla)).forEach(System.out::println);
+            libroRepository.findByIdioma(Idioma.getIdioma(sigla)).forEach(System.out::print);
         } else System.out.println("\nSigla incorrecta: " + sigla);
     }
 
@@ -193,7 +194,7 @@ public class Principal {
             // Busca en el repositorio de autores aquellos que estén vivos en el año especificado.
             List<Autor> listaAutores = autorRepository.buscarAutorPorFecha(fecha);
             if (listaAutores.isEmpty()) System.out.println("\nNo se encontraron autores.");
-            else listaAutores.forEach(System.out::println);
+            else listaAutores.forEach(System.out::print);
         } catch (InputMismatchException e) { // Captura una excepción si el usuario ingresa un valor no numérico.
             System.out.println("\nIngrese valores numericos.");
             sc.nextLine(); // Limpia el buffer de entrada.
@@ -217,15 +218,18 @@ public class Principal {
             return; // Sale del método porque no hay autores para buscar.
         }
 
-        // Busca un autor por nombre ignorando mayúsculas y minúsculas en el repositorio de autores.
-        Autor autor = autorRepository.findByNombreIgnoreCaseContaining(nombre);
-        if (autor != null){ // Verifica si se encontró algún autor.
-            System.out.println(autor);return;
+        // Busca los autores por nombre ignorando mayúsculas y minúsculas en el repositorio de autores.
+        List<Autor> autor = autorRepository.findByNombreIgnoreCaseContaining(nombre);
+        if (!autor.isEmpty() ){
+            System.out.println("\nCantidad de autores con la palabra '" + nombre + "' en sus nombres: " + autor.size());
+            Stream<String> resultado = autor.stream().map(Autor::toString);//Convierte cada objeto a String usando su método toString()
+            resultado.forEach(System.out::print);
+            return;
         }
          System.out.println("\nNo se encontro el autor: " + nombre);
     }
 
-    public void buscarLibroPorTitulo() throws JsonProcessingException {
+    public void registrarLibroPorTitulo() throws JsonProcessingException {
         System.out.println("\nIngrese el nombre del libro que desea buscar:");
         var texto = sc.nextLine();
 
