@@ -16,7 +16,7 @@ public interface AutorRepository extends JpaRepository<Autor, Long> {
     List<Autor> buscarAutorPorFecha(int fecha);
 
     // Consulta para encontrar un autor cuyo nombre contenga una cadena específica, ignorando mayúsculas y minúsculas
-    Autor findByNombreIgnoreCaseContaining(String nombre);
+    List<Autor> findByNombreIgnoreCaseContaining(String nombre);
 
     // Consulta nativa para encontrar la mayor edad al fallecer entre los autores fallecidos
     @Query(value = "SELECT MAX(fallecimiento - nacimiento) FROM autores WHERE fallecimiento IS NOT NULL", nativeQuery = true)
