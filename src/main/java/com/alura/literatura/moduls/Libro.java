@@ -15,13 +15,14 @@ public class Libro
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "autor_id")
     private Autor autor;
-    private String idioma;
+    @Enumerated(EnumType.STRING)
+    private Idioma idioma;
     private int descargas;
 
      public Libro(DatosLibro dtsLibro)
     {
         this.titulo = dtsLibro.titulo();
-        this.idioma = dtsLibro.idioma().get(0);
+        this.idioma = Idioma.getIdioma(dtsLibro.idioma().get(0)) != null ? Idioma.getIdioma(dtsLibro.idioma().get(0)) : Idioma.OTRO;
         this.descargas = dtsLibro.descargas();
     }
 
@@ -45,11 +46,11 @@ public class Libro
         this.autor = autor;
     }
 
-    public String getIdioma() {
+    public Idioma getIdioma() {
         return idioma;
     }
 
-    public void setIdioma(String idioma) {
+    public void setIdioma(Idioma idioma) {
         this.idioma = idioma;
     }
 
@@ -69,6 +70,6 @@ public class Libro
                 Autor: %s
                 Idioma: %s
                 Descargas: %d
-                """.formatted(titulo, autor.getNombre(), idioma, descargas);
+                """.formatted(titulo, autor.getNombre(), idioma.getSigla(), descargas);
     }
 }
