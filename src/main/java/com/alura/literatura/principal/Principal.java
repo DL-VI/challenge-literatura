@@ -96,7 +96,7 @@ public class Principal {
 
     public void estadisticaAutores() {
         if (listarLibrosRegistrados().isEmpty()) {
-            System.out.println("\nNo hay datos registrados.");return;
+            System.out.println("\nNo hay autores registrados.");return;
         }
 
         int cantidadAutores = listarAutoresRegistrados().size();
@@ -119,7 +119,7 @@ public class Principal {
     public void estadisticaLibros() {
 
         if (listarLibrosRegistrados().isEmpty()) {
-            System.out.println("\nNo hay datos registrados.");return;
+            System.out.println("\nNo hay libros registrados.");return;
         }
 
         DoubleSummaryStatistics stdc = listarLibrosRegistrados().stream()
@@ -167,8 +167,9 @@ public class Principal {
         if (sigla.equalsIgnoreCase("es") || sigla.equalsIgnoreCase("en")) {
             List<Libro> libros = listarLibrosRegistrados();
 
-            System.out.println("\nCantidad de libros encontrados: " + libros.stream().filter(i -> i.getIdioma().equals(sigla)).count());
-            libroRepository.findByIdioma(sigla).forEach(System.out::println);
+            System.out.println("\nCantidad de libros encontrados: " +
+                    libros.stream().filter(i -> i.getIdioma().equals(Idioma.getIdioma(sigla))).count());
+            libroRepository.findByIdioma(Idioma.getIdioma(sigla)).forEach(System.out::println);
         } else System.out.println("\nSigla incorrecta: " + sigla);
     }
 
