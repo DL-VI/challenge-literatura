@@ -11,16 +11,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class LiteraturaApplication implements CommandLineRunner
 {
-	@Autowired
+	@Autowired // Inyección de dependencias para LibroRepository
 	private LibroRepository libroRepository;
-	@Autowired
+	@Autowired // Inyección de dependencias para AutorRepository
 	private AutorRepository autorRepository;
 
+	// Método principal que inicia la aplicación Spring Boot
 	public static void main(String[] args)
 	{
 		SpringApplication.run(LiteraturaApplication.class, args);
 	}
 
+	// Método que se ejecuta después de iniciar la aplicación Spring Boot
 	@Override
 	public void run(String... args) throws Exception
 	{

@@ -10,11 +10,14 @@ public class Libro
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    // Anotación para especificar que este campo debe ser único y no nulo
     @Column(unique = true, nullable = false)
     private String titulo;
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "autor_id")
+    // Anotación para indicar una relación muchos a uno con la entidad Autor
+    @ManyToOne
+    @JoinColumn(name = "autor_id") // Anotación para especificar la columna de unión en la tabla libros
     private Autor autor;
+    // Anotación para especificar que este campo es un enumerado y que debe ser almacenado como una cadena
     @Enumerated(EnumType.STRING)
     private Idioma idioma;
     private int descargas;
@@ -22,6 +25,7 @@ public class Libro
      public Libro(DatosLibro dtsLibro)
     {
         this.titulo = dtsLibro.titulo();
+        // Asigna el idioma del libro desde DatosLibro, si no es nulo
         this.idioma = Idioma.getIdioma(dtsLibro.idioma().get(0)) != null ? Idioma.getIdioma(dtsLibro.idioma().get(0)) : Idioma.OTRO;
         this.descargas = dtsLibro.descargas();
     }
