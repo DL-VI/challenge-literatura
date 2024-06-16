@@ -93,13 +93,13 @@ Este proyecto utiliza Maven para gestionar sus dependencias. Al clonar este repo
 Para instalar las dependencias necesarias y compilar el proyecto, ejecuta el siguiente comando en la terminal:
 
 ```bash
-mvn compile
+./mvnw compile
 ```
 
 5. Ejecuta la aplicación:
 
 ```bash
-mvn spring-boot:run
+./mvnw spring-boot:run
 ```
 
 ## Uso
