@@ -93,7 +93,7 @@ Este proyecto utiliza Maven para gestionar sus dependencias. Al clonar este repo
 Para instalar las dependencias necesarias y compilar el proyecto, ejecuta el siguiente comando en la terminal:
 
 ```bash
-mvn clean install
+mvn compile
 ```
 
 5. Ejecuta la aplicación:
