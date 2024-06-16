@@ -30,7 +30,7 @@
 
 
 ### Acceso al proyecto
-- <p>Puedes <a href="https://github.com/DL-VI/challenge-literatura">acceder al código fuente del proyecto</a></p> 
+- <p>Puedes <a href="https://github.com/DL-VI/challenge-literatura/tree/main/src/main/java/com/alura/literatura">acceder al código fuente del proyecto</a></p> 
 
 
 ## Instalación
