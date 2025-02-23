@@ -40,7 +40,6 @@ Este proyecto utiliza Maven para gestionar sus dependencias. Al clonar este repo
 1. Clona el repositorio:
     ```bash
     git clone https://github.com/DL-VI/challenge-literatura.git
-    cd challenge-literatura
     ```
 
 2. Crea una base de datos en PostgreSQL.
