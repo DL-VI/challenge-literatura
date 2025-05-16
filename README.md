@@ -19,14 +19,12 @@
 ![Apache Maven](https://img.shields.io/badge/Apache%20Maven-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white)
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 
 
 ### Requisitos
 
-- Java 17
-- Spring Boot 2.5 o superior
-- PostgreSQL 13 o superior
-- Maven 3.6 o superior
+- Docker
 
 
 ### Acceso al proyecto
@@ -42,64 +40,10 @@ Este proyecto utiliza Maven para gestionar sus dependencias. Al clonar este repo
     git clone https://github.com/DL-VI/challenge-literatura.git
     ```
 
-2. Crea una base de datos en PostgreSQL.
-
-3. Configura las variables en el archivo: `src/main/resources/application.properties`
-
-      ```properties
-      spring.application.name=literatura
-      spring.datasource.url=jdbc:postgresql://localhost/tu_base_de_datos
-      spring.datasource.username=tu_usuario
-      spring.datasource.password=tu_contraseña
-      spring.datasource.driver-class-name=org.postgresql.Driver
-      hibernate.dialect=org.hibernate.dialect.HSQLDialect
-
-      spring.jpa.hibernate.ddl-auto=update
-      spring.jpa.show-sql=false
-      spring.jpa.format-sql=false
-      ```
-   
-4. Instalación de dependencias:
-- Para construir este proyecto, asegúrate de tener las siguientes dependencias en tu archivo `pom.xml`:
-
-```xml
-<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.16.0</version>
-		</dependency>
-</dependencies>
-```
-
-Para instalar las dependencias necesarias y compilar el proyecto, ejecuta el siguiente comando en la terminal:
-
-```bash
-./mvnw compile
-```
-
-5. Ejecuta la aplicación:
-
-```bash
-./mvnw spring-boot:run
-```
+2. Accede a la raiz del proyecto y ejecuta el docker compose
+    ```bash
+    docker compose run --rm --service-ports app
+    ```
 
 ## Uso
 
